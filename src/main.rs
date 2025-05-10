@@ -1,7 +1,6 @@
 use clap::Parser;
 use std::fmt;
 use std::str::FromStr;
-use regex::Regex;
 
 #[derive(Debug, Clone)]
 struct Domain {
@@ -26,10 +25,28 @@ impl FromStr for Domain {
     }
 }
 
-// Validation function using regex
 fn is_valid_domain(domain: &str) -> bool {
-    let re = Regex::new(r"^(?=.{1,253}$)(?!-)[A-Za-z0-9-]{1,63}(?<!-)(\.[A-Za-z]{2,})+$").unwrap();
-    re.is_match(domain)
+    if domain.len() > 253 {
+        return false;
+    }
+
+    let labels: Vec<&str> = domain.split('.').collect();
+    if labels.len() < 2 {
+        return false; // Must have at least one dot
+    }
+
+    for label in labels {
+        if label.is_empty()
+            || label.len() > 63
+            || label.starts_with('-')
+            || label.ends_with('-')
+            || !label.chars().all(|c| c.is_ascii_alphanumeric() || c == '-')
+        {
+            return false;
+        }
+    }
+
+    true
 }
 
 #[derive(Parser, Debug)]
