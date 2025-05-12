@@ -15,17 +15,17 @@ To get started with kdns, you will need to have Rust installed. You can download
 
 Once you have Rust installed, you can build kdns by running the following command:
 
-\`\`\`bash
+```bash
 cargo build --release
-\`\`\`
+```
 
 This will create an executable file in the `target/release` directory.
 
 To run kdns, you can use the following command:
 
-\`\`\`bash
+```bash
 ./target/release/kdns --a example.com
-\`\`\`
+```
 
 Replace `example.com` with the domain you want to query.
 
