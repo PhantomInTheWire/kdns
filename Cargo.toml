@@ -7,5 +7,4 @@ edition = "2024"
 hickory-dns = "0.25.2"
 clap = "4.5.37"
 rand = "0.9.1"
-derive_more = { version = "2.0.1", features = ["display"] }
-regex = "1.11.1"
+hickory-proto = "0.25.2"
